@@ -1,0 +1,26 @@
+{
+  "manifest_version": 3,
+  "name": "TUF Copilot",
+  "version": "1.0.0",
+  "description": "Extracts problem and code from takeUforward and automatically analyzes it with ChatGPT.",
+  "permissions": [
+    "storage",
+    "clipboardWrite"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["*://takeuforward.org/*"],
+      "js": ["content.js"]
+    },
+    {
+      "matches": ["*://chatgpt.com/*"],
+      "js": ["chatgpt.js"]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["inject.js"],
+      "matches": ["*://takeuforward.org/*"]
+    }
+  ]
+}
