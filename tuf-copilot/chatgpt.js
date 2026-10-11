@@ -8,16 +8,32 @@ window.addEventListener('load', () => {
         // Clear it from storage so it doesn't paste again if you refresh the page
         chrome.storage.local.remove('pendingTufPrompt');
 
-        // --- RELEASE UI: Add a sleek Toast Notification ---
+        // --- ULTRA-PREMIUM GLASSY TOAST NOTIFICATION ---
         const toast = document.createElement('div');
         Object.assign(toast.style, {
-            position: 'fixed', top: '20px', left: '50%', transform: 'translateX(-50%)',
-            backgroundColor: 'rgba(0, 0, 0, 0.85)', color: '#fff', padding: '10px 24px',
-            borderRadius: '20px', zIndex: '999999', fontSize: '14px', fontWeight: '500',
-            fontFamily: 'system-ui, sans-serif', boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
-            transition: 'all 0.3s ease', backdropFilter: 'blur(8px)', textAlign: 'center'
+            position: 'fixed', 
+            top: '24px', 
+            left: '50%', 
+            transform: 'translateX(-50%)',
+            backgroundColor: 'rgba(15, 15, 20, 0.4)', // Highly transparent base
+            color: '#ffffff', 
+            border: '1px solid rgba(255, 255, 255, 0.18)', // Crisp, reflective glass edge
+            padding: '12px 24px',
+            borderRadius: '16px', 
+            zIndex: '999999', 
+            fontSize: '14px', 
+            fontWeight: '500',
+            fontFamily: 'system-ui, -apple-system, sans-serif', 
+            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4)', 
+            backdropFilter: 'blur(16px) saturate(180%)', // Intense frost + vivid colors behind it
+            WebkitBackdropFilter: 'blur(16px) saturate(180%)', 
+            transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+            textAlign: 'center',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '10px'
         });
-        toast.innerText = '✨ TUF Copilot: Auto-pasting...';
+        toast.innerHTML = '✨ <span style="letter-spacing: 0.3px;">TUF Copilot: Auto-pasting...</span>';
         document.body.appendChild(toast);
 
         let attempts = 0;
@@ -48,14 +64,21 @@ window.addEventListener('load', () => {
                         clearInterval(clickInterval);
                         setTimeout(() => {
                             sendButton.click();
-                            // Update toast to success state
-                            toast.innerText = '✅ Analysis requested!';
-                            toast.style.backgroundColor = '#10a37f';
-                            setTimeout(() => toast.style.opacity = '0', 2000);
+                            
+                            // 🟢 SUCCESS GLASS STATE
+                            toast.innerHTML = '✅ <span>Analysis requested!</span>';
+                            toast.style.backgroundColor = 'rgba(16, 163, 127, 0.35)'; // High transparency green
+                            toast.style.borderColor = 'rgba(16, 163, 127, 0.5)';
+                            toast.style.boxShadow = '0 8px 32px rgba(16, 163, 127, 0.25)'; // Green glow
+                            
+                            setTimeout(() => {
+                                toast.style.opacity = '0';
+                                toast.style.transform = 'translate(-50%, -10px)'; 
+                            }, 2000);
                             setTimeout(() => toast.remove(), 2500);
                         }, 100);
                     } 
-                    // INCREASED LIMIT: Wait up to 7 seconds (35 attempts * 200ms) for UI to load
+                    // Wait up to 7 seconds for UI to load
                     else if (clickAttempts > 35) {
                         clearInterval(clickInterval);
                         
@@ -63,20 +86,35 @@ window.addEventListener('load', () => {
                             bubbles: true, cancelable: true, key: 'Enter', code: 'Enter', keyCode: 13
                         }));
                         
-                        toast.innerText = '⚠️ Taking longer than usual. Press Enter to send.';
-                        toast.style.backgroundColor = '#eab308'; // Warning yellow
-                        setTimeout(() => toast.style.opacity = '0', 4000);
+                        // 🟡 WARNING GLASS STATE
+                        toast.innerHTML = '⏳ <span>Taking longer than usual. Press Enter to send.</span>';
+                        toast.style.backgroundColor = 'rgba(234, 179, 8, 0.35)'; // High transparency yellow
+                        toast.style.borderColor = 'rgba(234, 179, 8, 0.5)';
+                        toast.style.boxShadow = '0 8px 32px rgba(234, 179, 8, 0.25)'; // Yellow glow
+                        
+                        setTimeout(() => {
+                            toast.style.opacity = '0';
+                            toast.style.transform = 'translate(-50%, -10px)';
+                        }, 4000);
                         setTimeout(() => toast.remove(), 4500);
                     }
                 }, 200); 
             }
 
-            // FALLBACK MECHANISM: If ChatGPT UI changes and text box isn't found
+            // FALLBACK MECHANISM
             if (attempts > 20) {
                 clearInterval(checkInterval);
-                toast.innerText = '⚠️ ChatGPT UI updated! Please press Ctrl+V / Cmd+V to paste your code.';
-                toast.style.backgroundColor = '#ef4444'; // Red error color
-                setTimeout(() => toast.style.opacity = '0', 6000);
+                
+                // 🔴 ERROR GLASS STATE
+                toast.innerHTML = '⚠️ <span>ChatGPT UI updated! Please press Ctrl+V to paste.</span>';
+                toast.style.backgroundColor = 'rgba(239, 68, 68, 0.35)'; // High transparency red
+                toast.style.borderColor = 'rgba(239, 68, 68, 0.5)';
+                toast.style.boxShadow = '0 8px 32px rgba(239, 68, 68, 0.25)'; // Red glow
+                
+                setTimeout(() => {
+                    toast.style.opacity = '0';
+                    toast.style.transform = 'translate(-50%, -10px)';
+                }, 6000);
                 setTimeout(() => toast.remove(), 6500);
             }
         }, 500); 
