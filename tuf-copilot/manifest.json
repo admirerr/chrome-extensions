@@ -2,11 +2,16 @@
   "manifest_version": 3,
   "name": "TUF Copilot",
   "version": "1.0.0",
-  "description": "Extracts problem and code from takeUforward and automatically analyzes it with ChatGPT.",
+  "description": "Extracts problems and code from takeUforward and analyzes them instantly with ChatGPT.",
   "permissions": [
     "storage",
     "clipboardWrite"
   ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
   "content_scripts": [
     {
       "matches": ["*://takeuforward.org/*"],
