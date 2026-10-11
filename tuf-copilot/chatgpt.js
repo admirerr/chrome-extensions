@@ -65,7 +65,7 @@ window.addEventListener('load', () => {
                         setTimeout(() => {
                             sendButton.click();
                             
-                            // 🟢 SUCCESS GLASS STATE
+                            // SUCCESS GLASS STATE
                             toast.innerHTML = '✅ <span>Analysis requested!</span>';
                             toast.style.backgroundColor = 'rgba(16, 163, 127, 0.35)'; // High transparency green
                             toast.style.borderColor = 'rgba(16, 163, 127, 0.5)';
@@ -86,7 +86,7 @@ window.addEventListener('load', () => {
                             bubbles: true, cancelable: true, key: 'Enter', code: 'Enter', keyCode: 13
                         }));
                         
-                        // 🟡 WARNING GLASS STATE
+                        // WARNING GLASS STATE
                         toast.innerHTML = '⏳ <span>Taking longer than usual. Press Enter to send.</span>';
                         toast.style.backgroundColor = 'rgba(234, 179, 8, 0.35)'; // High transparency yellow
                         toast.style.borderColor = 'rgba(234, 179, 8, 0.5)';
@@ -105,7 +105,7 @@ window.addEventListener('load', () => {
             if (attempts > 20) {
                 clearInterval(checkInterval);
                 
-                // 🔴 ERROR GLASS STATE
+                // ERROR GLASS STATE
                 toast.innerHTML = '⚠️ <span>ChatGPT UI updated! Please press Ctrl+V to paste.</span>';
                 toast.style.backgroundColor = 'rgba(239, 68, 68, 0.35)'; // High transparency red
                 toast.style.borderColor = 'rgba(239, 68, 68, 0.5)';
